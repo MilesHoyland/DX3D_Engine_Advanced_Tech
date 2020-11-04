@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Graphics Engine">
+      <UniqueIdentifier>{693eea1f-6a27-44c8-94b7-a8776dc2a586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{7a470d94-960c-49d7-b13a-0798717a1e3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{dd0d6166-4b57-43e7-a3ec-9618fc0527b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{c3b3acef-5660-4c7e-a5ed-1fc30df6827e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="StringConverter.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapChain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="StringConverter.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h" />
+  </ItemGroup>
+</Project>
