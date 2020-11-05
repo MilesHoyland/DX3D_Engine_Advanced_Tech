@@ -18,5 +18,6 @@ public:
 
 private:
 	SwapChain* m_swap_chain;
+	VertexBuffer* m_vb;
 };
 

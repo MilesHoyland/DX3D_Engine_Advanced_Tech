@@ -32,6 +32,7 @@
     </ClCompile>
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -48,5 +49,6 @@
     </ClInclude>
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
 </Project>
