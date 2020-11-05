@@ -31,6 +31,7 @@
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="DeviceContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -46,5 +47,6 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="DeviceContext.h" />
   </ItemGroup>
 </Project>
