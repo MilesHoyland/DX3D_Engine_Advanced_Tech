@@ -24,8 +24,8 @@ void AppWindow::OnCreate()
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.2f,0.0f}, // POS1
-		{0.0f,0.7f,0.0f}, // POS2
+		{-0.5f,-0.5f,0.0f}, // POS1
+		{0.0f,0.5f,0.0f}, // POS2
 		{ 0.5f,-0.5f,0.0f}
 	};
 

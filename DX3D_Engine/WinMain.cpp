@@ -1,6 +1,8 @@
 #include "AppWindow.h"
+#include "ExceptionHelper.h"
 #include <stdexcept>
-
+#include <Windows.h>
+#include "StringConverter.h"
 
 int main()
 {
@@ -16,9 +18,15 @@ int main()
 			}
 		}
 	}
-	catch(const std::runtime_error& error)
+/*	catch (const ExceptionHelper& error) {
+
+		std::wstring w_type = StringConverter::StringToWide(error.GetType());
+		MessageBox(nullptr, StringConverter::StringToWide(error.what()).c_str(), w_type.c_str(), MB_OK);
+	}*/
+	catch(const std::exception& error)
 	{
-		//MessageBox(nullptr, error.what(), "An error has occured", MB_OK);
+		std::wstring w_msg = StringConverter::StringToWide(error.what());
+		MessageBox(nullptr,w_msg.c_str(), L"An error has occured", MB_OK);
 	}
 	return 0;
 }

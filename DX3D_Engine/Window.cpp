@@ -1,5 +1,7 @@
 #include "Window.h"
 #include <stdexcept>
+#include <sstream>
+#include "StringConverter.h"
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
@@ -24,6 +26,8 @@ bool Window::StartUp()
 	wc.hInstance = GetModuleHandle(nullptr);
 	wc.lpszClassName = window_class_wide.c_str();
 	wc.lpfnWndProc = &WndProc;
+
+
 
 	//TODO: change to make use of exceptions
 	//..if registration fails return false & throw exception
@@ -145,4 +149,63 @@ void Window::OnDestroy()
 Window::~Window()
 {
 	DestroyWindow(hwnd);
+}
+
+Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept
+	: ExceptionHelper(line, file),
+	hr(hr)
+{}
+
+const char* Window::Exception::what() const noexcept
+{
+	std::ostringstream oss;
+	oss << GetType() << std::endl
+		<< "[Error Code] " << GetHR() << std::endl
+		<< "[Description] " << GetErrorString() << std::endl
+		<< GetOriginString();
+	what_buffer = oss.str();
+	return what_buffer.c_str();
+}
+
+const char* Window::Exception::GetType() const noexcept
+{
+
+	return "Window Error";
+}
+
+std::string Window::Exception::TranslateHR(HRESULT hr) noexcept
+{
+	char* p_buffer = nullptr;
+	WCHAR p_buff[2048] = {};
+	DWORD nMsgLen = FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, // 
+		nullptr, //
+		hr,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		p_buff,
+		sizeof(p_buff),
+		nullptr
+	);
+
+	// 0 string length returned indicates a failure
+	if (nMsgLen == 0)
+	{
+		return "Unidentified error code";
+	}
+	// copy error string from windows-allocated buffer to std::string
+	std::string errorString = StringConverter::WideToString(p_buff);
+	// free windows buffer as not needed
+	LocalFree(p_buff);
+	return errorString;
+}
+
+HRESULT Window::Exception::GetHR() const noexcept
+{
+	return hr;
+}
+
+std::string Window::Exception::GetErrorString() const noexcept
+{
+	return TranslateHR(hr);
 }

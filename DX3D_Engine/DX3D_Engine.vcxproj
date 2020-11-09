@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="ExceptionHelper.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="SwapChain.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="ExceptionHelper.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="SwapChain.h" />
