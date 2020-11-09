@@ -25,8 +25,10 @@ void AppWindow::OnCreate()
 	{
 		//X - Y - Z
 		{-0.5f,-0.5f,0.0f}, // POS1
-		{0.0f,0.5f,0.0f}, // POS2
-		{ 0.5f,-0.5f,0.0f}
+		{-0.5f,0.5f,0.0f}, // POS2
+		{0.5f,-0.5f,0.0f}, // POS2
+		{0.5f,0.5f,0.0f}, // POS1
+	
 	};
 
 	m_vb = GraphicsEngine::Get()->CreateVertexBuffer();
@@ -56,7 +58,7 @@ void AppWindow::OnUpdate()
 
 	GraphicsEngine::Get()->GetImmediateDeviceContext()->SetVertexBuffer(m_vb);
 
-	GraphicsEngine::Get()->GetImmediateDeviceContext()->DrawTriangleList(m_vb->GetSizeVertexList(), 0);
+	GraphicsEngine::Get()->GetImmediateDeviceContext()->DrawTriangleStrip(m_vb->GetSizeVertexList(), 0);
 	m_swap_chain->PresentFrame(true);
 }
 

@@ -34,7 +34,15 @@ void DeviceContext::SetVertexBuffer(VertexBuffer* vertex_buffer)
 
 void DeviceContext::DrawTriangleList(UINT vertex_count, UINT start_vertex_index)
 {
+	//Set the primitive topology to triangle List
 	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	m_device_context->Draw(vertex_count, start_vertex_index);
+}
+
+void DeviceContext::DrawTriangleStrip(UINT vertex_count, UINT start_vertex_index)
+{
+	//Set the primitive topology to triangle strip
+	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	m_device_context->Draw(vertex_count, start_vertex_index);
 }
 

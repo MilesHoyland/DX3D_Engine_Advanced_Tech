@@ -30,10 +30,16 @@
     <ClCompile Include="StringConverter.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="SwapChain.cpp" />
-    <ClCompile Include="DeviceContext.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="ExceptionHelper.cpp" />
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Graphics Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -48,9 +54,15 @@
     <ClInclude Include="StringConverter.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="SwapChain.h" />
-    <ClInclude Include="DeviceContext.h" />
-    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="ExceptionHelper.h" />
+    <ClInclude Include="DeviceContext.h">
+      <Filter>Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Graphics Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
