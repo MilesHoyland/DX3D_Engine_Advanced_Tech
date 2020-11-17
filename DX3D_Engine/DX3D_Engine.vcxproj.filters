@@ -42,6 +42,7 @@
     </ClCompile>
     <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -69,6 +70,7 @@
     <ClInclude Include="VertexShader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="ConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />
