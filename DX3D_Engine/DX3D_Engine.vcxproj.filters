@@ -40,6 +40,8 @@
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>Graphics Engine</Filter>
     </ClCompile>
+    <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="PixelShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -64,5 +66,19 @@
     <ClInclude Include="VertexBuffer.h">
       <Filter>Graphics Engine</Filter>
     </ClInclude>
+    <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="PixelShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DX3D_Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Application</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>Application</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
