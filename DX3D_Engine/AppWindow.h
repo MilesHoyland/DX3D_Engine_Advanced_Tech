@@ -6,6 +6,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
+#include "IndexBuffer.h"
 
 class AppWindow : public Window
 {
@@ -25,6 +26,8 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;
+	IndexBuffer* m_ib;
+
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 

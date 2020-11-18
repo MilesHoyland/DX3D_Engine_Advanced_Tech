@@ -15,6 +15,7 @@ class VertexBuffer;
 class VertexShader;
 class PixelShader;
 class ConstantBuffer;
+class IndexBuffer;
 
 
 class GraphicsEngine
@@ -22,7 +23,7 @@ class GraphicsEngine
 public:
 	GraphicsEngine() = default;
 	
-	static GraphicsEngine* Get()
+	static GraphicsEngine* get()
 	{
 		static GraphicsEngine sGraphics;
 		return &sGraphics;
@@ -36,6 +37,7 @@ public:
 	DeviceContext* GetImmediateDeviceContext();
 	VertexBuffer* CreateVertexBuffer();
 	ConstantBuffer* createConstantBuffer();
+	IndexBuffer* CreateIndexBuffer();
 	VertexShader* CreateVertexShader(const void * shader_byte_code, size_t byte_code_size);
 	PixelShader* CreatePixelShader(const void* shader_byte_code, size_t byte_code_size);
 public:
@@ -73,6 +75,6 @@ private:
 	friend class ConstantBuffer;
 	friend class VertexShader;
 	friend class PixelShader;
-
+	friend class IndexBuffer;
 };
 

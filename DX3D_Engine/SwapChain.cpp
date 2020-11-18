@@ -4,7 +4,7 @@
 
 bool SwapChain::StartUp(HWND hwnd, UINT width, UINT height)
 {
-	ID3D11Device* device = GraphicsEngine::Get()->m_device;
+	ID3D11Device* device = GraphicsEngine::get()->m_device;
 
 	//Create swap chain descriptor.
 	DXGI_SWAP_CHAIN_DESC scd;
@@ -28,7 +28,7 @@ bool SwapChain::StartUp(HWND hwnd, UINT width, UINT height)
 
 	//TODO change to handle with an exeption
 	//..create swapchain
-	HRESULT hr = GraphicsEngine::Get()->m_dxgi_factory->CreateSwapChain(device,&scd, &m_swap_chain);
+	HRESULT hr = GraphicsEngine::get()->m_dxgi_factory->CreateSwapChain(device,&scd, &m_swap_chain);
 	if (FAILED(hr))
 	{
 		return false;

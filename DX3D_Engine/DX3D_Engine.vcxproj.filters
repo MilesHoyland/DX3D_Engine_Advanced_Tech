@@ -46,6 +46,7 @@
     <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -80,6 +81,7 @@
     <ClInclude Include="Matrix4x4.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="IndexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />

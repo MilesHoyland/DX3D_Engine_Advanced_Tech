@@ -147,6 +147,7 @@
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="ExceptionHelper.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="SwapChain.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="ExceptionHelper.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="resource.h" />

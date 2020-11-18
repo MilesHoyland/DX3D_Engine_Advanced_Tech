@@ -8,7 +8,7 @@ VertexShader::VertexShader()
 
 bool VertexShader::Initialise(const void* shader_byte_code, size_t byte_size)
 {
-	if (!SUCCEEDED(GraphicsEngine::Get()->m_device->CreateVertexShader(shader_byte_code, byte_size, nullptr, &m_vertex_shader)))	
+	if (!SUCCEEDED(GraphicsEngine::get()->m_device->CreateVertexShader(shader_byte_code, byte_size, nullptr, &m_vertex_shader)))	
 		return false;
 	
 	return true;
