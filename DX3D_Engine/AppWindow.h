@@ -8,6 +8,8 @@
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
 #include "InputListener.h"
+#include "Matrix4x4.h"
+
 
 class AppWindow : public Window, public InputListener
 {
@@ -33,7 +35,7 @@ public:
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
 	virtual void onRightMouseUp(const Point& mouse_pos) override;
 
-	void UpdateQuadPosition();
+	void Update();
 
 
 private:
@@ -59,5 +61,9 @@ private:
 
 	float m_rot_x = 0.0f;
 	float m_rot_y = 0.0f;
+
+	float m_forward = 0.0f;
+	float m_rightward = 0.0f;
+	Matrix4x4 m_world_cam;
 };
 
