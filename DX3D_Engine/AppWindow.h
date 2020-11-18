@@ -7,8 +7,9 @@
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
+#include "InputListener.h"
 
-class AppWindow : public Window
+class AppWindow : public Window, public InputListener
 {
 public:
 	AppWindow() = default;
@@ -19,6 +20,8 @@ public:
 	void OnCreate() override;
 	void OnUpdate() override;
 	void OnDestroy() override;
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
 
 	void UpdateQuadPosition();
 
@@ -40,5 +43,9 @@ private:
 
 	float m_delta_pos;
 	float m_delta_scale;
+	float m_delta_rot;
+
+	float m_rot_x = 0.0f;
+	float m_rot_y = 0.0f;
 };
 

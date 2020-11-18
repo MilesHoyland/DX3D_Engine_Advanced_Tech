@@ -148,6 +148,7 @@
     <ClCompile Include="ExceptionHelper.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="SwapChain.cpp" />
@@ -163,6 +164,8 @@
     <ClInclude Include="ExceptionHelper.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="InputListener.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="resource.h" />

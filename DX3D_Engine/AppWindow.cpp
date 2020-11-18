@@ -3,6 +3,7 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include <Windows.h>
+#include "InputSystem.h"
 
 struct vertex
 {
@@ -31,6 +32,8 @@ void AppWindow::OnCreate()
 
 	RECT rc = this->GetClientWindowRect();
 	m_swap_chain->StartUp(this->hwnd, rc.right-rc.left, rc.bottom-rc.top);
+
+	InputSystem::get()->addListener(this);
 
 
 	vertex vertex_list[] =
@@ -109,6 +112,7 @@ void AppWindow::OnCreate()
 void AppWindow::OnUpdate()
 {
 	Window::OnUpdate();
+	InputSystem::get()->update();
 	GraphicsEngine::get()->GetImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
 		1, 0.5, 0.5, 1);
 
@@ -154,7 +158,30 @@ void AppWindow::OnDestroy()
 	m_ps->Release();
 	GraphicsEngine::get()->ShutDown();
 }
+void AppWindow::onKeyDown(int key)
+{
+	if (key == 'W')
+	{
+		m_rot_x += 3.14f * m_delta_time;
+	}
+	else if (key == 'S')
+	{
+		m_rot_x -= 3.14f * m_delta_time;
+	}
+	else if (key == 'A')
+	{
+		m_rot_y += 3.14f * m_delta_time;
+	}
+	else if (key == 'D')
+	{
+		m_rot_y -= 3.14f * m_delta_time;
+	}
+}
 
+void AppWindow::onKeyUp(int key)
+{
+
+}
 void AppWindow::UpdateQuadPosition()
 {
 	constant cc;
@@ -175,15 +202,15 @@ void AppWindow::UpdateQuadPosition()
 //	cc.m_world.setScale(Vector3D::lerp(Vector3D(-2, -2, 0), Vector3D(2, 2, 0), (sin(m_delta_scale)+1.0f)/2.0f));
 
 	temp.setIdentity();
-	temp.setRotationZ(m_delta_scale);
+	temp.setRotationZ(0);
 	cc.m_world *= temp;
 	
 	temp.setIdentity();
-	temp.setRotationY(m_delta_scale);
+	temp.setRotationY(m_rot_y);
 	cc.m_world *= temp;
 
 	temp.setIdentity();
-	temp.setRotationX(m_delta_scale);
+	temp.setRotationX(m_rot_x);
 	cc.m_world *= temp;
 
 
