@@ -19,6 +19,9 @@ public:
 	void OnUpdate() override;
 	void OnDestroy() override;
 
+	void UpdateQuadPosition();
+
+
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;
@@ -26,5 +29,13 @@ private:
 	PixelShader* m_ps;
 
 	ConstantBuffer* m_cb;
+
+private:
+	float m_old_delta;
+	float m_new_delta;
+	float m_delta_time;
+
+	float m_delta_pos;
+	float m_delta_scale;
 };
 

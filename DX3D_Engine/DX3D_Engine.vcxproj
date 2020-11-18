@@ -161,10 +161,12 @@
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="ExceptionHelper.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Vector3D.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Window.h" />

@@ -13,6 +13,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{c3b3acef-5660-4c7e-a5ed-1fc30df6827e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{231b659f-18c2-4666-8a70-401d288ce1e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -71,6 +74,12 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Vector3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />
