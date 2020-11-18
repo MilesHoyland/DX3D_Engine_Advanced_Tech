@@ -168,6 +168,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="SwapChain.h" />

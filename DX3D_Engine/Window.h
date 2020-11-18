@@ -33,6 +33,8 @@ public:
 	virtual void OnCreate();
 	virtual void OnUpdate();
 	virtual void OnDestroy();
+	virtual void onFocus();
+	virtual void onKillFocus();
 
 	//Release the window
 	~Window();
