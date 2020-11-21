@@ -14,30 +14,34 @@
 class AppWindow : public Window, public InputListener
 {
 public:
+
+	//App Lifetime Methods
 	AppWindow() = default;
 	AppWindow(std::string title, std::string windowType)
 		: Window(title, windowType)
 	{}
-
 	void OnCreate() override;
-	void OnUpdate() override;
 	void OnDestroy() override;
 	virtual void onFocus() override;
 	virtual void onKillFocus() override;
+	
+	//App Tick
+	void OnUpdate() override;
 
+
+	//Input listener
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;
-
 	virtual void onMouseMove(const Point& delta_mouse_pos) override;
-
 	virtual void onLeftMouseDown(const Point& mouse_pos) override;
 	virtual void onLeftMouseUp(const Point& mouse_pos) override;
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
 	virtual void onRightMouseUp(const Point& mouse_pos) override;
 
+	//Scene Tick
 	void Update();
 
-
+	//Render Resources
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;
@@ -48,6 +52,7 @@ private:
 
 	ConstantBuffer* m_cb;
 
+	//Time Member Data
 private:
 	float m_old_delta;
 	float m_new_delta;

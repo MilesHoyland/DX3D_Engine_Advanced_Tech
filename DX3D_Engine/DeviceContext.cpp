@@ -5,8 +5,9 @@
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
+#include <exception>
 
-DeviceContext::DeviceContext(ID3D11DeviceContext* device_context) : m_device_context(device_context)
+DeviceContext::DeviceContext(ID3D11DeviceContext* device_context, RenderSystem* render_manager) : m_renderer(render_manager), m_device_context(device_context)
 {
 
 }
@@ -25,14 +26,6 @@ void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer*
 void DeviceContext::setIndexBuffer(IndexBuffer* index_buffer)
 {
 	m_device_context->IASetIndexBuffer(index_buffer->m_buffer, DXGI_FORMAT_R32_UINT, 0);
-}
-
-
-bool DeviceContext::ShutDown()
-{
-	m_device_context->Release();
-	delete this;
-	return true;
 }
 
 void DeviceContext::ClearRenderTargetColour(SwapChain* swap_chain, float r, float g, float b, float a)
@@ -92,4 +85,5 @@ void DeviceContext::SetPixelShader(PixelShader* pixel_shader)
 
 DeviceContext::~DeviceContext()
 {
+	m_device_context->Release();
 }

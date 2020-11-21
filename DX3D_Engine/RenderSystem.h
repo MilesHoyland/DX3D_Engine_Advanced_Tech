@@ -2,10 +2,10 @@
 #include <d3d11.h>
 #include "Prerequisites.h"
 
-//The DX11 Interface
+//The DX11 Interface, RenderSystem
 class RenderSystem
 {
-
+//Public Render System set up functions
 public:
 	RenderSystem();
 	//Initialize the GraphicsEngine and DirectX 11 Device
@@ -13,6 +13,23 @@ public:
 	//Release all the resources loaded
 	bool release();
 	~RenderSystem();
+
+//Public Render System Methods
+public:
+	//Pipeline Creation Methods
+	SwapChain* createSwapChain(HWND hwnd, UINT width, UINT height);
+	DeviceContext* getImmediateDeviceContext();
+	VertexBuffer* createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader);
+	IndexBuffer* createIndexBuffer(void* list_indices, UINT size_list);
+	ConstantBuffer* createConstantBuffer(void* buffer, UINT size_buffer);
+	VertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
+	PixelShader* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
+
+public:
+	//Shader Compilation Methods
+	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
+	bool compilePixelShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
+	void releaseCompiledShader();
 
 	//Wrapper around the device context
 private:

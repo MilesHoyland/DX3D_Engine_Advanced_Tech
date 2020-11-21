@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <Windows.h>
 #include "StringConverter.h"
+#include "InputSystem.h"
 
 int main()
 {
@@ -18,11 +19,6 @@ int main()
 			}
 		}
 	}
-/*	catch (const ExceptionHelper& error) {
-
-		std::wstring w_type = StringConverter::StringToWide(error.GetType());
-		MessageBox(nullptr, StringConverter::StringToWide(error.what()).c_str(), w_type.c_str(), MB_OK);
-	}*/
 	catch(const std::exception& error)
 	{
 		std::wstring w_msg = StringConverter::StringToWide(error.what());
