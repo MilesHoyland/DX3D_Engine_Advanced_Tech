@@ -84,6 +84,7 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>InputSystem</Filter>
     </ClCompile>
+    <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -142,6 +143,10 @@
     </ClInclude>
     <ClInclude Include="Vector4D.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Prerequisites.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

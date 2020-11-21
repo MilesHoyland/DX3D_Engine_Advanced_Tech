@@ -150,6 +150,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="StringConverter.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -169,6 +170,8 @@
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Prerequisites.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="SwapChain.h" />
