@@ -90,6 +90,9 @@
     <ClCompile Include="RenderSystem.cpp">
       <Filter>Graphics Engine\RenderSystem</Filter>
     </ClCompile>
+    <ClCompile Include="LoggingManager.cpp" />
+    <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -155,6 +158,12 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Graphics Engine\RenderSystem</Filter>
     </ClInclude>
+    <ClInclude Include="expected.h">
+      <Filter>Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingManager.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />
