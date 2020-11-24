@@ -9,6 +9,7 @@
 #include "IndexBuffer.h"
 #include "InputListener.h"
 #include "Matrix4x4.h"
+#include "LayerStack.h"
 
 
 class AppWindow : public Window, public InputListener
@@ -28,6 +29,9 @@ public:
 	//App Tick
 	void OnUpdate() override;
 
+	//Layer Functions
+	void PushLayer(Layer* layer);
+	void PushOverlay(Layer* layer);
 
 	//Input listener
 	virtual void onKeyDown(int key) override;
@@ -46,10 +50,8 @@ private:
 	std::shared_ptr<SwapChain> m_swap_chain;
 	std::shared_ptr<VertexBuffer> m_vb;
 	std::shared_ptr<IndexBuffer> m_ib;
-
 	std::shared_ptr<VertexShader> m_vs;
 	std::shared_ptr<PixelShader> m_ps;
-
 	std::shared_ptr<ConstantBuffer> m_cb;
 
 	//Time Member Data
@@ -57,6 +59,8 @@ private:
 	float m_old_delta;
 	float m_new_delta;
 	float m_delta_time;
+
+	LayerStack m_layer_stack;
 
 	float m_delta_pos;
 	float m_delta_scale;

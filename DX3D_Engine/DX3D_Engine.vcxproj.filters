@@ -114,6 +114,9 @@
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuiLayer.cpp" />
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="LayerStack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -209,6 +212,10 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiLayer.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="SkinnyWindows.h" />
+    <ClInclude Include="LayerStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />

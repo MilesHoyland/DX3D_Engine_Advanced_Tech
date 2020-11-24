@@ -108,8 +108,13 @@ void AppWindow::OnCreate()
 void AppWindow::OnUpdate()
 {
 	Window::OnUpdate();
-
+	
+	//Update Input system
 	InputSystem::get()->update();
+
+	//Update layers
+	for (Layer* layer : m_layer_stack)
+		layer->onUpdate();
 
 	//CLEAR THE RENDER TARGET 
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
@@ -143,6 +148,16 @@ void AppWindow::OnUpdate()
 	m_new_delta = ::GetTickCount();
 
 	m_delta_time = (m_old_delta) ? ((m_new_delta - m_old_delta) / 1000.0f) : 0;
+}
+
+void AppWindow::PushLayer(Layer* layer)
+{
+	m_layer_stack.pushState(layer);
+}
+
+void AppWindow::PushOverlay(Layer* layer)
+{
+	m_layer_stack.pushOverlay(layer);
 }
 
 
