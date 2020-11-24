@@ -1,36 +1,50 @@
 #include "GraphicsEngine.h"
 #include "RenderSystem.h"
+#include "ServiceLocator.h"
 
-GraphicsEngine::GraphicsEngine() {
 
-}
+GraphicsEngine* GraphicsEngine::m_engine = nullptr;
 
-bool GraphicsEngine::init()
+GraphicsEngine::GraphicsEngine() 
 {
-	m_render_system = new RenderSystem();
-	m_render_system->init();
-	return true;
+	try {
+		m_render_system = new RenderSystem();
+	}
+	catch (...) { 
+		throw std::exception("Graphics engine failed to initialise.");
+		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("Graphics engine failed to initialise.");
+		return;
+	}
+	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Graphics engine initialised successfully.");
 }
+
 
 RenderSystem* GraphicsEngine::getRenderSystem()
 {
 	return m_render_system;
 }
 
-bool GraphicsEngine::release()
-{
-	m_render_system->release();
-	delete m_render_system;
-	return true;
-}
-
 GraphicsEngine::~GraphicsEngine()
 {
-
+	GraphicsEngine::m_engine = nullptr;
+	delete m_render_system;
 }
 
 GraphicsEngine* GraphicsEngine::get()
 {
-	static GraphicsEngine engine;
-	return &engine;
+	return m_engine;
+}
+
+void GraphicsEngine::create()
+{
+	if (GraphicsEngine::m_engine) throw std::exception("Graphics Engine already created");
+	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Creating graphics engine...");
+	GraphicsEngine::m_engine = new GraphicsEngine();
+}
+
+void GraphicsEngine::release()
+{
+	if (!GraphicsEngine::m_engine) return;
+	delete GraphicsEngine::m_engine;
+	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Graphics engine deleted & released.");
 }

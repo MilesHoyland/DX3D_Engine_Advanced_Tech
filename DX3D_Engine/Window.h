@@ -22,12 +22,9 @@ public:
 public:
 	//Window 
 	Window(std::string title, std::string windowType);
-	bool StartUp();
-	bool ShutDown();
 	void Broadcast();
 	bool Running();
 	RECT GetClientWindowRect();
-	void SetHWND(HWND hWnd);
 
 	//Events
 	virtual void OnCreate();
@@ -41,6 +38,7 @@ public:
 protected:
 	HWND hwnd = nullptr;
 	bool running = true;
+	bool initialised = false;
 
 	std::string window_title = "";
 	std::wstring window_title_wide = L""; //Wide string representation of window title

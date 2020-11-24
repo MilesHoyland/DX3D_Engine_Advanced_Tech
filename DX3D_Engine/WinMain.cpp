@@ -23,18 +23,33 @@ int main()
 		return -1;
 	}
 
+	// try to initialise the graphics engine
+	try 
+	{	GraphicsEngine::create();	}
+	catch (...) {
+		FILE_LOG_ERROR("Failed to initialise graphics engine.");
+		return -1;
+	}
+	
+	// try to initialise the input system
+	try
+	{	InputSystem::create();	}
+	catch (...) 
+	{
+		FILE_LOG_ERROR("Failed to initialise Input system.");
+		return -1;
+	}
+
+
 	// run the game
 	try
 	{
 		AppWindow app("MyWindew", "AppClass");
 		util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Application instance created.");
 		FILE_LOG_INFO("Application instance created via macro");
-		if (app.StartUp())
+		while (app.Running())
 		{
-			while (app.Running())
-			{
-				app.Broadcast();
-			}
+			app.Broadcast();
 		}
 	}
 	catch(const std::exception& error)
@@ -42,6 +57,11 @@ int main()
 		std::wstring w_msg = StringConverter::StringToWide(error.what());
 		MessageBox(nullptr,w_msg.c_str(), L"An error has occured", MB_OK);
 	}
+
+	// release systems
+	InputSystem::release();
+	GraphicsEngine::release();
+
 	return 0;
 }
 

@@ -43,14 +43,14 @@ public:
 
 	//Render Resources
 private:
-	SwapChain* m_swap_chain;
-	VertexBuffer* m_vb;
-	IndexBuffer* m_ib;
+	std::shared_ptr<SwapChain> m_swap_chain;
+	std::shared_ptr<VertexBuffer> m_vb;
+	std::shared_ptr<IndexBuffer> m_ib;
 
-	VertexShader* m_vs;
-	PixelShader* m_ps;
+	std::shared_ptr<VertexShader> m_vs;
+	std::shared_ptr<PixelShader> m_ps;
 
-	ConstantBuffer* m_cb;
+	std::shared_ptr<ConstantBuffer> m_cb;
 
 	//Time Member Data
 private:

@@ -1,5 +1,6 @@
 #pragma once
 #include "Logger.h"
+
 namespace util
 {
 	class ServiceLocator

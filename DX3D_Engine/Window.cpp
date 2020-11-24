@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <sstream>
 #include "StringConverter.h"
+#include "ServiceLocator.h"
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
@@ -12,12 +13,9 @@ Window::Window(std::string title, std::string windowType)
 	this->window_title_wide = StringConverter::StringToWide(this->window_title);
 	this->window_class = windowType;
 	this->window_class_wide = StringConverter::StringToWide(this->window_class);
-}
 
-bool Window::StartUp()
-{
 	//..setting up WindowEx class
-	WNDCLASSEX wc{}; 
+	WNDCLASSEX wc{};
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -32,7 +30,11 @@ bool Window::StartUp()
 	//TODO: change to make use of exceptions
 	//..if registration fails return false & throw exception
 	if (!RegisterClassEx(&wc))
+	{
 		throw std::runtime_error("Filed to register WNDCLASSEX.");
+		util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("Failed to register Window.");
+	}
+		
 
 	//..adjust client region
 	RECT rect = { 0,0,1024,768 };
@@ -54,16 +56,20 @@ bool Window::StartUp()
 		nullptr,
 		nullptr,
 		nullptr,
-		this);
+		nullptr);
 
 	//if the creation fail return false
 	if (!hwnd)
-		throw std::runtime_error("Filed to initialize Window.");
+	{
+		throw std::runtime_error("Failed to initialize Window.");
+		util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("Failed to initialize window.");
+	}
 
-	//show up the window
+	//show the window
 	ShowWindow(hwnd, SW_SHOW);
-	return true;
+
 }
+
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
@@ -72,7 +78,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	{
 	case WM_CREATE:
 	{
-		// Create window msg
+		/*// Create window msg
 		auto* const params = reinterpret_cast<LPCREATESTRUCT>(lparam);
 		auto* const window =
 			reinterpret_cast<Window* const>(params->lpCreateParams);
@@ -81,6 +87,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(window));
 		window->SetHWND(hwnd);
 		window->OnCreate();
+		*/
 		break;
 	}
 
@@ -97,7 +104,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	{
 		// Event fired when the window get focus
 		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		window->onFocus();
+		if(window) window->onFocus();
 		break;
 	}
 	case WM_KILLFOCUS:
@@ -117,6 +124,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 void Window::Broadcast()
 {
+	if (!this->initialised)
+	{
+		// .. and then stored for later lookup
+		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
+		this->OnCreate();
+		this->initialised = true;
+	}
+
 	MSG msg{};
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE) > 0)
 	{
@@ -139,11 +154,6 @@ RECT Window::GetClientWindowRect()
 	RECT rc;
 	::GetClientRect(this->hwnd, &rc);
 	return rc;
-}
-
-void Window::SetHWND(HWND hWnd)
-{
-	this->hwnd = hWnd;
 }
 
 void Window::OnCreate()

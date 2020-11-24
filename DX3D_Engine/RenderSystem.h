@@ -7,23 +7,22 @@ class RenderSystem
 {
 //Public Render System set up functions
 public:
-	RenderSystem();
 	//Initialize the GraphicsEngine and DirectX 11 Device
-	bool init();
+	RenderSystem();
+
 	//Release all the resources loaded
-	bool release();
 	~RenderSystem();
 
 //Public Render System Methods
 public:
 	//Pipeline Creation Methods
-	SwapChain* createSwapChain(HWND hwnd, UINT width, UINT height);
-	DeviceContext* getImmediateDeviceContext();
-	VertexBuffer* createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader);
-	IndexBuffer* createIndexBuffer(void* list_indices, UINT size_list);
-	ConstantBuffer* createConstantBuffer(void* buffer, UINT size_buffer);
-	VertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
-	PixelShader* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
+	std::shared_ptr<SwapChain> createSwapChain(HWND hwnd, UINT width, UINT height);
+	std::shared_ptr<DeviceContext> getImmediateDeviceContext();
+	std::shared_ptr<VertexBuffer> createVertexBuffer(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader);
+	std::shared_ptr<IndexBuffer> createIndexBuffer(void* list_indices, UINT size_list);
+	std::shared_ptr<ConstantBuffer> createConstantBuffer(void* buffer, UINT size_buffer);
+	std::shared_ptr<VertexShader> createVertexShader(const void* shader_byte_code, size_t byte_code_size);
+	std::shared_ptr<PixelShader> createPixelShader(const void* shader_byte_code, size_t byte_code_size);
 
 public:
 	//Shader Compilation Methods
@@ -33,7 +32,7 @@ public:
 
 	//Wrapper around the device context
 private:
-	DeviceContext* m_imm_device_context;
+	std::shared_ptr<DeviceContext> m_imm_device_context;
 
 //DX11 Member Objects
 private:

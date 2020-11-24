@@ -1,6 +1,8 @@
 #include "InputSystem.h"
 #include <Windows.h>
+#include "ServiceLocator.h"
 
+InputSystem* InputSystem::m_input_system = nullptr;
 
 InputSystem::InputSystem()
 {
@@ -116,4 +118,18 @@ InputSystem* InputSystem::get()
 {
 	static InputSystem system;
 	return &system;
+}
+
+void InputSystem::create()
+{
+	if (InputSystem::m_input_system) throw std::exception("Input system already created");
+	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Creating Input system...");
+	InputSystem::m_input_system = new InputSystem();
+}
+
+void InputSystem::release()
+{
+	if (!InputSystem::m_input_system) return;
+	delete InputSystem::m_input_system;
+	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Input system deleted & released.");
 }

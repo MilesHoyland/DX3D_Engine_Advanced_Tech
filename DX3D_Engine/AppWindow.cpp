@@ -32,7 +32,6 @@ void AppWindow::OnCreate()
 
 	RECT rc = this->GetClientWindowRect();
 	
-	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain(hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	
@@ -150,7 +149,6 @@ void AppWindow::OnUpdate()
 void AppWindow::OnDestroy()
 {
 	Window::OnDestroy();
-	GraphicsEngine::get()->release();
 }
 
 void AppWindow::Update()
@@ -194,13 +192,7 @@ void AppWindow::Update()
 
 
 	cc.m_view = world_cam;
-	/*cc.m_proj.setOrthoLH
-	(
-		(this->getClientWindowRect().right - this->getClientWindowRect().left)/300.0f,
-		(this->getClientWindowRect().bottom - this->getClientWindowRect().top)/300.0f,
-		-4.0f,
-		4.0f
-	);*/
+
 
 	int width = (this->GetClientWindowRect().right - this->GetClientWindowRect().left);
 	int height = (this->GetClientWindowRect().bottom - this->GetClientWindowRect().top);

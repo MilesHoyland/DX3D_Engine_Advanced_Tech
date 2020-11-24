@@ -6,7 +6,7 @@ class ConstantBuffer
 {
 public:
 	ConstantBuffer(void* buffer, UINT size_buffer, RenderSystem* render_manager);
-	void update(DeviceContext* context, void* buffer);
+	void update(std::shared_ptr<DeviceContext> context, void* buffer);
 	~ConstantBuffer();
 private:
 	RenderSystem* m_renderer = nullptr;
@@ -14,4 +14,5 @@ private:
 	ID3D11Buffer* m_buffer;
 private:
 	friend class DeviceContext;
+
 };
