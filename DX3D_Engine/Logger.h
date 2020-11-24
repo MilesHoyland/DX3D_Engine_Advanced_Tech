@@ -213,7 +213,7 @@ namespace util
 }
 
 // Core log macros
-#define FILE_LOG_INFO(...) ::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>(__VA_ARGS__)
-//#define LOG_INFO(...) ::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>(__VA_ARGS__)
-//#define LOG_INFO(...) ::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>(__VA_ARGS__)
-//#define LOG_INFO(...) ::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>(__VA_ARGS__)
+#define FILE_LOG_INFO(...)		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>(__VA_ARGS__)
+#define FILE_LOG_DEBUG(...)		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::debug>(__VA_ARGS__)
+#define FILE_LOG_WARNING(...)	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::warning>(__VA_ARGS__)
+#define FILE_LOG_ERROR(...)		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>(__VA_ARGS__)
