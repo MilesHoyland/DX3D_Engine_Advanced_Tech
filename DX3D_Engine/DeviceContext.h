@@ -7,13 +7,16 @@ class DeviceContext
 public:
 	DeviceContext(ID3D11DeviceContext* device_context, RenderSystem* render_manager);
 
-	void ClearRenderTargetColour(std::shared_ptr<SwapChain> swap_chain, float r, float g, float b, float a);
+	void ClearRenderTargetColour(const std::shared_ptr<SwapChain>& swap_chain, float r, float g, float b, float a);
 	
-	void setIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer);
-	void SetVertexBuffer(std::shared_ptr<VertexBuffer> vertex_buffer);
+	void setIndexBuffer(const std::shared_ptr<IndexBuffer>& index_buffer);
+	void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertex_buffer);
 	
-	void setConstantBuffer(std::shared_ptr<VertexShader> vertex_shader, std::shared_ptr<ConstantBuffer> buffer);
-	void setConstantBuffer(std::shared_ptr<PixelShader> pixel_shader, std::shared_ptr<ConstantBuffer> buffer);
+	void setConstantBuffer(const std::shared_ptr<VertexShader>& vertex_shader,const  std::shared_ptr<ConstantBuffer>& buffer);
+	void setConstantBuffer(const std::shared_ptr<PixelShader>& pixel_shader, const  std::shared_ptr<ConstantBuffer>& buffer);
+
+	void setTexture(const std::shared_ptr<VertexShader>& vertex_shader, const std::shared_ptr<Texture>& texture);
+	void setTexture(const std::shared_ptr<PixelShader>& pixel_shader, const std::shared_ptr<Texture>& texture);
 
 	void DrawTriangleList(UINT vertex_count, UINT start_vertex_index);
 	void DrawTriangleStrip(UINT vertex_count, UINT start_vertex_index);
@@ -21,8 +24,8 @@ public:
 
 	void SetViewPortSize(UINT width, UINT height);
 	
-	void SetVertexShader(std::shared_ptr<VertexShader> vertex_shader);
-	void SetPixelShader(std::shared_ptr<PixelShader> pixel_shader);
+	void SetVertexShader(const std::shared_ptr<VertexShader>& vertex_shader);
+	void SetPixelShader(const std::shared_ptr<PixelShader>& pixel_shader);
 
 	~DeviceContext();
 private:

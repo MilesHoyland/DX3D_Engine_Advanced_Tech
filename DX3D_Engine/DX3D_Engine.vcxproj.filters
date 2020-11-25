@@ -46,6 +46,12 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{424bcab1-8672-4f3e-a5de-dc36b527c1de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Engine\ResourceManager">
+      <UniqueIdentifier>{c3090554-a4fa-4958-919f-82415aeee299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Engine\ResourceManager\TextureManager">
+      <UniqueIdentifier>{717dedea-c2b9-4652-a866-f2672124d727}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -94,8 +100,6 @@
       <Filter>Graphics Engine\RenderSystem</Filter>
     </ClCompile>
     <ClCompile Include="LoggingManager.cpp" />
-    <ClCompile Include="ServiceLocator.cpp" />
-    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
@@ -114,9 +118,31 @@
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="ImGuiLayer.cpp" />
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="LayerStack.cpp" />
+    <ClCompile Include="Resource.cpp">
+      <Filter>Graphics Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Graphics Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiLayer.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerStack.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -155,9 +181,6 @@
     <ClInclude Include="ExceptionHelper.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="VertexShader.h">
       <Filter>Graphics Engine\RenderSystem\Vertex Shader</Filter>
     </ClInclude>
@@ -186,8 +209,6 @@
       <Filter>Graphics Engine</Filter>
     </ClInclude>
     <ClInclude Include="LoggingManager.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
@@ -212,10 +233,37 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="ImGuiLayer.h" />
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="SkinnyWindows.h" />
-    <ClInclude Include="LayerStack.h" />
+    <ClInclude Include="Resource.h">
+      <Filter>Graphics Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Graphics Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiLayer.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnyWindows.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerStack.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Vector2D.h">
+      <Filter>MathLibrary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />

@@ -1,14 +1,13 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by DX3D_Engine.rc
+#pragma once
+#include "StringConverter.h"
 
-// Next default values for new objects
-// 
-#ifdef APSTUDIO_INVOKED
-#ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        101
-#define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1001
-#define _APS_NEXT_SYMED_VALUE           101
-#endif
-#endif
+class Resource
+{
+public:
+	Resource(const wchar_t* full_path);
+	virtual ~Resource();
+
+protected:
+	std::wstring m_full_path;
+};
+

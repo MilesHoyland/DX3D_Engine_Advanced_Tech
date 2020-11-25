@@ -9,4 +9,8 @@ class ConstantBuffer;
 class VertexShader;
 class PixelShader;
 class RenderSystem;
+class ResourceSystem;
+class Resouce;
+class TextureManager;
+class Texture;
 class GraphicsEngine;

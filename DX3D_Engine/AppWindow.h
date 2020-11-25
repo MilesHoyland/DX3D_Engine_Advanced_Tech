@@ -54,6 +54,8 @@ private:
 	std::shared_ptr<PixelShader> m_ps;
 	std::shared_ptr<ConstantBuffer> m_cb;
 
+	std::shared_ptr<Texture> m_tex_wood;
+
 	//Time Member Data
 private:
 	float m_old_delta;

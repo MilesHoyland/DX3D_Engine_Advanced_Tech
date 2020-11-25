@@ -11,8 +11,16 @@ GraphicsEngine::GraphicsEngine()
 		m_render_system = new RenderSystem();
 	}
 	catch (...) { 
-		throw std::exception("Graphics engine failed to initialise.");
-		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("Graphics engine failed to initialise.");
+		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("RenderSystem failed to initialise.");
+		throw std::exception("Render system failed to initialise.");
+		return;
+	}
+	try {
+		m_tex_manager = new TextureManager();
+	}
+	catch (...) {
+		::util::ServiceLocator::getFileLogger()->print<util::SeverityType::error>("Texture Manager failed to initialise.");
+		throw std::exception("Texture Manager failed to initialise.");
 		return;
 	}
 	::util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("Graphics engine initialised successfully.");
@@ -24,9 +32,16 @@ RenderSystem* GraphicsEngine::getRenderSystem()
 	return m_render_system;
 }
 
+TextureManager* GraphicsEngine::getTextureManager()
+{
+	return m_tex_manager;
+}
+
 GraphicsEngine::~GraphicsEngine()
 {
+	
 	GraphicsEngine::m_engine = nullptr;
+	delete m_tex_manager;
 	delete m_render_system;
 }
 
