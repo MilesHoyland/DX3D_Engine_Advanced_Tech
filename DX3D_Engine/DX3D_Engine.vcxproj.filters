@@ -216,6 +216,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="SkinnyWindows.h" />
     <ClInclude Include="LayerStack.h" />
+    <ClInclude Include="Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_Engine.rc" />
