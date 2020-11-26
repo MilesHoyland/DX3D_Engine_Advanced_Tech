@@ -71,22 +71,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\tinyobjloader\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\tinyobjloader\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\tinyobjloader\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\include;C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\tinyobjloader\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\miles\Desktop\DX3D_Engine\DX3D_Engine\Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -168,6 +168,8 @@
     <ClCompile Include="LayerStack.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="LoggingManager.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -206,6 +208,8 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggingManager.h" />
     <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshManager.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Prerequisites.h" />
@@ -222,6 +226,7 @@
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
     <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="VertexMesh.h" />
     <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -234,6 +239,16 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 #include <Windows.h>
 #include "InputSystem.h"
+#include "Mesh.h"
 
 struct vertex
 {
@@ -22,7 +23,6 @@ struct constant
 };
 
 
-
 void AppWindow::OnCreate()
 {
 	Window::OnCreate();
@@ -31,17 +31,15 @@ void AppWindow::OnCreate()
 	InputSystem::get()->showCursor(false);
 
 	//Create an load a texture
-	m_tex_wood = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\wood.jpg");
-	
-	
+	m_tex_wood = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\brick.png");
+	m_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
 	
 	RECT rc = this->GetClientWindowRect();
-	
 	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain(hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	
 	m_world_cam.setTranslation(Vector3D(0, 0, -2));
-
+	/*
 	Vector3D position_list[] =
 	{
 		{Vector3D(-0.5f,-0.5f,-0.5f)},
@@ -126,16 +124,17 @@ void AppWindow::OnCreate()
 
 	UINT size_index_list = ARRAYSIZE(index_list);
 	m_ib = GraphicsEngine::get()->getRenderSystem()->createIndexBuffer(index_list, size_index_list);
-
+	*/
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
 	GraphicsEngine::get()->getRenderSystem()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-
 	m_vs = GraphicsEngine::get()->getRenderSystem()->createVertexShader(shader_byte_code, size_shader);
+	GraphicsEngine::get()->getRenderSystem()->releaseCompiledShader();
+	/*
 	m_vb = GraphicsEngine::get()->getRenderSystem()->createVertexBuffer(vertex_list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
-	GraphicsEngine::get()->getRenderSystem()->releaseCompiledShader();
+	*/
 
 
 	GraphicsEngine::get()->getRenderSystem()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
@@ -146,7 +145,6 @@ void AppWindow::OnCreate()
 	cc.m_time = 0;
 
 	m_cb = GraphicsEngine::get()->getRenderSystem()->createConstantBuffer(&cc, sizeof(constant));
-
 }
 
 void AppWindow::OnUpdate()
@@ -163,6 +161,7 @@ void AppWindow::OnUpdate()
 	//CLEAR THE RENDER TARGET 
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
 		1, 1.0f, 1.0f, 1);
+	
 	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
 	RECT rc = this->GetClientWindowRect();
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->SetViewPortSize(rc.right - rc.left, rc.bottom - rc.top);
@@ -180,13 +179,14 @@ void AppWindow::OnUpdate()
 	
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->SetVertexBuffer(m_vb);
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->SetVertexBuffer(m_mesh->getVertexBuffer());
 	//SET THE INDICES OF THE TRIANGLE TO DRAW
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setIndexBuffer(m_mesh->getIndexBuffer());
 
 
 	// FINALLY DRAW THE TRIANGLE
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+	//GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(m_mesh->getIndexBuffer()->getSizeIndexList(), 0, 0);
 	m_swap_chain->PresentFrame(true);
 
 

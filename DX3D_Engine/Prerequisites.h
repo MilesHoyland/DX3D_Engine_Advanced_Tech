@@ -14,3 +14,5 @@ class Resouce;
 class TextureManager;
 class Texture;
 class GraphicsEngine;
+class MeshManager;
+class Mesh;

@@ -43,7 +43,8 @@ void DeviceContext::ClearRenderTargetColour(const std::shared_ptr<SwapChain> &sw
 {
 	FLOAT clear_color[] = { r,g,b,a };
 	m_device_context->ClearRenderTargetView(swap_chain->m_render_target_view, clear_color);
-	m_device_context->OMSetRenderTargets(1, &swap_chain->m_render_target_view, NULL);
+	m_device_context->ClearDepthStencilView(swap_chain->m_dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 0);
+	m_device_context->OMSetRenderTargets(1, &swap_chain->m_render_target_view, swap_chain->m_dsv);
 }
 
 void DeviceContext::SetVertexBuffer(const std::shared_ptr<VertexBuffer> &vertex_buffer)
@@ -77,8 +78,8 @@ void DeviceContext::drawIndexedTriangleList(UINT index_count, UINT start_vertex_
 void DeviceContext::SetViewPortSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT view_port = {};
-	view_port.Width = width;
-	view_port.Height = height;
+	view_port.Width = (FLOAT)width;
+	view_port.Height = (FLOAT)height;
 	view_port.MinDepth = 0.0f;
 	view_port.MaxDepth = 1.0f;
 	m_device_context->RSSetViewports(1, &view_port);

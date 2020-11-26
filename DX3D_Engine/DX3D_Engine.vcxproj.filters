@@ -52,6 +52,9 @@
     <Filter Include="Graphics Engine\ResourceManager\TextureManager">
       <UniqueIdentifier>{717dedea-c2b9-4652-a866-f2672124d727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Engine\ResourceManager\MeshManager">
+      <UniqueIdentifier>{1d895b8d-8f00-416f-8652-af7a89cf1dce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -142,7 +145,15 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Graphics Engine\ResourceManager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>Graphics Engine\ResourceManager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -260,8 +271,19 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h">
+      <Filter>MathLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Graphics Engine\ResourceManager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>Graphics Engine\ResourceManager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics Engine\ResourceManager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexMesh.h">
       <Filter>MathLibrary</Filter>
     </ClInclude>
   </ItemGroup>
@@ -274,6 +296,9 @@
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
       <Filter>Application</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutShader.hlsl">
+      <Filter>Graphics Engine</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

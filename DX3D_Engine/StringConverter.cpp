@@ -12,3 +12,10 @@ std::string StringConverter::WideToString(const std::wstring& wstr)
 	return string;
 }
 
+std::string StringConverter::WideToString(wchar_t* wstr)
+{
+	std::string string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wstr);
+
+	return string;
+}
+

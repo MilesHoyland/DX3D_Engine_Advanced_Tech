@@ -55,6 +55,7 @@ private:
 	std::shared_ptr<ConstantBuffer> m_cb;
 
 	std::shared_ptr<Texture> m_tex_wood;
+	std::shared_ptr<Mesh> m_mesh;
 
 	//Time Member Data
 private:
