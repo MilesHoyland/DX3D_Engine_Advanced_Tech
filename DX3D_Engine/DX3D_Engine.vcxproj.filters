@@ -300,5 +300,8 @@
     <FxCompile Include="VertexMeshLayoutShader.hlsl">
       <Filter>Graphics Engine</Filter>
     </FxCompile>
+    <FxCompile Include="SkyBoxShader.hlsl">
+      <Filter>Graphics Engine</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

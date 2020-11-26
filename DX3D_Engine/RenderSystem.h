@@ -29,7 +29,9 @@ public:
 	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
 	bool compilePixelShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
 	void releaseCompiledShader();
-
+	void setRasterizerState(bool cull_front);
+private:
+	void initRasterizerState();
 	//Wrapper around the device context
 private:
 	std::shared_ptr<DeviceContext> m_imm_device_context;
@@ -53,6 +55,9 @@ private:
 	ID3DBlob* m_blob = nullptr;
 	ID3DBlob* m_vsblob = nullptr;
 	ID3DBlob* m_psblob = nullptr;
+
+	ID3D11RasterizerState* m_cull_front_state = nullptr;
+	ID3D11RasterizerState* m_cull_back_state = nullptr;
 
 	//ID3D11 - Means, the object inherits from ID3D11DeviceChild.
 	//VertexShader and PixelShader objects interface their respective shaders,

@@ -28,6 +28,7 @@ public:
 	
 	//App Tick
 	void OnUpdate() override;
+	
 
 	//Layer Functions
 	void PushLayer(Layer* layer);
@@ -42,8 +43,16 @@ public:
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
 	virtual void onRightMouseUp(const Point& mouse_pos) override;
 
+public:
 	//Scene Tick
-	void Update();
+	void update();
+	void updateModel();
+	void updateCamera();
+	void updateSkyBox();
+
+	//DrawMeshes
+	void drawMesh(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<VertexShader>& vs, const std::shared_ptr<PixelShader>& ps, const std::shared_ptr < ConstantBuffer>& cb,
+		const std::shared_ptr <Texture>& tex);
 
 	//Render Resources
 private:
@@ -51,11 +60,20 @@ private:
 	std::shared_ptr<VertexBuffer> m_vb;
 	std::shared_ptr<IndexBuffer> m_ib;
 	std::shared_ptr<VertexShader> m_vs;
-	std::shared_ptr<PixelShader> m_ps;
-	std::shared_ptr<ConstantBuffer> m_cb;
 
-	std::shared_ptr<Texture> m_tex_wood;
+	std::shared_ptr<PixelShader> m_ps;
+	std::shared_ptr<PixelShader> m_sky_ps;
+
+	std::shared_ptr<ConstantBuffer> m_cb;
+	std::shared_ptr<ConstantBuffer> m_sky_cb;
+
+	std::shared_ptr<Texture> m_wood_tex;
+	std::shared_ptr<Texture> m_sky_tex;
+
+
 	std::shared_ptr<Mesh> m_mesh;
+	std::shared_ptr<Mesh> m_sky_mesh;
+
 
 	//Time Member Data
 private:
@@ -79,6 +97,10 @@ private:
 
 	float m_forward = 0.0f;
 	float m_rightward = 0.0f;
+
+	bool cull = true;
 	Matrix4x4 m_world_cam;
+	Matrix4x4 m_view_cam;
+	Matrix4x4 m_proj_cam;
 };
 

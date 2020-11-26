@@ -47,7 +47,7 @@ void DeviceContext::ClearRenderTargetColour(const std::shared_ptr<SwapChain> &sw
 	m_device_context->OMSetRenderTargets(1, &swap_chain->m_render_target_view, swap_chain->m_dsv);
 }
 
-void DeviceContext::SetVertexBuffer(const std::shared_ptr<VertexBuffer> &vertex_buffer)
+void DeviceContext::setVertexBuffer(const std::shared_ptr<VertexBuffer> &vertex_buffer)
 {
 	UINT stride = vertex_buffer->m_size_vertex;
 	UINT offset = 0;
@@ -55,14 +55,14 @@ void DeviceContext::SetVertexBuffer(const std::shared_ptr<VertexBuffer> &vertex_
 	m_device_context->IASetInputLayout(vertex_buffer->m_layout);
 }
 
-void DeviceContext::DrawTriangleList(UINT vertex_count, UINT start_vertex_index)
+void DeviceContext::drawTriangleList(UINT vertex_count, UINT start_vertex_index)
 {
 	//Set the primitive topology to triangle List
 	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	m_device_context->Draw(vertex_count, start_vertex_index);
 }
 
-void DeviceContext::DrawTriangleStrip(UINT vertex_count, UINT start_vertex_index)
+void DeviceContext::drawTriangleStrip(UINT vertex_count, UINT start_vertex_index)
 {
 	//Set the primitive topology to triangle strip
 	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
@@ -75,7 +75,7 @@ void DeviceContext::drawIndexedTriangleList(UINT index_count, UINT start_vertex_
 	m_device_context->DrawIndexed(index_count, start_index_location, start_vertex_index);
 }
 
-void DeviceContext::SetViewPortSize(UINT width, UINT height)
+void DeviceContext::setViewPortSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT view_port = {};
 	view_port.Width = (FLOAT)width;
@@ -85,12 +85,12 @@ void DeviceContext::SetViewPortSize(UINT width, UINT height)
 	m_device_context->RSSetViewports(1, &view_port);
 }
 
-void DeviceContext::SetVertexShader(const std::shared_ptr<VertexShader> &vertex_shader)
+void DeviceContext::setVertexShader(const std::shared_ptr<VertexShader> &vertex_shader)
 {
 	m_device_context->VSSetShader(vertex_shader->m_vertex_shader, nullptr, 0);
 }
 
-void DeviceContext::SetPixelShader(const std::shared_ptr<PixelShader> &pixel_shader)
+void DeviceContext::setPixelShader(const std::shared_ptr<PixelShader> &pixel_shader)
 {
 	m_device_context->PSSetShader(pixel_shader->m_pixel_shader, nullptr, 0);
 }
