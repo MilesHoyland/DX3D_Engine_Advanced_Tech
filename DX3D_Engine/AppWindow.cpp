@@ -24,12 +24,44 @@ struct constant
 	unsigned int m_time;
 };
 
+void AppWindow::render()
+{
+	//CLEAR THE RENDER TARGET 
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
+		0, 0.3f, 0.4f, 1);
+	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
+	RECT rc = this->GetClientWindowRect();
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setViewPortSize(rc.right - rc.left, rc.bottom - rc.top);
+
+
+
+	//COMPUTE TRANSFORM MATRICES
+	update();
+
+
+	//RENDER MODEL
+	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(false);
+	drawMesh(m_mesh, m_vs, m_ps, m_cb, m_wood_tex);
+	//RENDER SKYBOX/SPHERE
+	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(true);
+	drawMesh(m_sky_mesh, m_vs, m_sky_ps, m_sky_cb, m_sky_tex);
+
+
+	m_swap_chain->PresentFrame(true);
+
+
+	m_old_delta = m_new_delta;
+	m_new_delta = ::GetTickCount();
+
+	m_delta_time = (m_old_delta) ? ((m_new_delta - m_old_delta) / 1000.0f) : 0;
+}
 
 void AppWindow::OnCreate()
 {
 	Window::OnCreate();
 
 	InputSystem::get()->addListener(this);
+	m_play_state = true;
 	InputSystem::get()->showCursor(false);
 
 	//Create an load a texture
@@ -169,32 +201,7 @@ void AppWindow::OnUpdate()
 	for (Layer* layer : m_layer_stack)
 		layer->onUpdate();
 
-	//CLEAR THE RENDER TARGET 
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
-		0, 0.3f, 0.4f, 1);
-	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
-	RECT rc = this->GetClientWindowRect();
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setViewPortSize(rc.right - rc.left, rc.bottom - rc.top);
-
-
-	update();
-
-	//RENDER MODEL
-	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(false);
-	drawMesh(m_mesh, m_vs, m_ps, m_cb, m_wood_tex);
-	//RENDER SKYBOX/SPHERE
-	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(true);
-	drawMesh(m_sky_mesh, m_vs, m_sky_ps, m_sky_cb, m_sky_tex);
-
-
-	m_swap_chain->PresentFrame(true);
-
-
-	m_old_delta = m_new_delta;
-	m_new_delta = ::GetTickCount();
-
-	m_delta_time = (m_old_delta) ? ((m_new_delta - m_old_delta) / 1000.0f) : 0;
-
+	this->render();
 }
 
 void AppWindow::PushLayer(Layer* layer)
@@ -206,11 +213,17 @@ void AppWindow::PushOverlay(Layer* layer)
 {
 	m_layer_stack.pushOverlay(layer);
 }
-
+void AppWindow::onSize()
+{
+	RECT rc = this->GetClientWindowRect();
+	m_swap_chain->resize(rc.right, rc.bottom);
+	this->render();
+}
 
 void AppWindow::OnDestroy()
 {
 	Window::OnDestroy();
+	m_swap_chain->setFullScreen(false, 1, 1);
 }
 
 void AppWindow::update()
@@ -314,6 +327,8 @@ void AppWindow::onKillFocus()
 }
 void AppWindow::onKeyDown(int key)
 {
+	if (!m_play_state) return;
+
 	if (key == 'W')
 	{
 		//m_rot_x += 3.14f*m_delta_time;
@@ -334,6 +349,19 @@ void AppWindow::onKeyDown(int key)
 		//m_rot_y -= 3.14f*m_delta_time;
 		m_rightward = 1.0f;
 	}
+	if (key == 'G')
+	{
+		m_play_state = (m_play_state) ? false : true;
+		InputSystem::get()->showCursor(!m_play_state);
+	}
+	else if (key == 'F')
+	{
+		m_fullscreen_state = (m_fullscreen_state) ? false : true;
+		RECT size_screen = this->getSizeScreen();
+
+		m_swap_chain->setFullScreen(m_fullscreen_state, size_screen.right, size_screen.bottom);
+	}
+
 }
 
 void AppWindow::onKeyUp(int key)
@@ -344,6 +372,8 @@ void AppWindow::onKeyUp(int key)
 
 void AppWindow::onMouseMove(const Point& mouse_pos)
 {
+	if (!m_play_state) return;
+
 	int width = (this->GetClientWindowRect().right - this->GetClientWindowRect().left);
 	int height = (this->GetClientWindowRect().bottom - this->GetClientWindowRect().top);
 

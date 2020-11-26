@@ -19,6 +19,7 @@ SwapChain::SwapChain(HWND hwnd, UINT width, UINT height, RenderSystem* render_ma
 	desc.OutputWindow = hwnd;
 	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
+	desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	desc.Windowed = TRUE;
 
 	//Create the swap chain for the window indicated by HWND parameter
@@ -29,10 +30,32 @@ SwapChain::SwapChain(HWND hwnd, UINT width, UINT height, RenderSystem* render_ma
 		throw std::exception("SwapChain not created successfully");
 	}
 
+	reloadBuffers(width, height);
+}
+
+void SwapChain::setFullScreen(bool fullscreen, unsigned int width, unsigned int height)
+{
+	resize(width, height);
+	m_swap_chain->SetFullscreenState(fullscreen, nullptr);
+}
+
+void SwapChain::resize(unsigned int width, unsigned int height)
+{
+	if (m_render_target_view) m_render_target_view->Release();
+	if (m_dsv) m_dsv->Release();
+
+	m_swap_chain->ResizeBuffers(1, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+	reloadBuffers(width, height);
+}
+
+void SwapChain::reloadBuffers(unsigned int width, unsigned int height)
+{
+	ID3D11Device* device = m_renderer->m_d3d_device;
+
 	//Get the back buffer color and create its render target view
 	//--------------------------------
 	ID3D11Texture2D* buffer = NULL;
-	hr = m_swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);
+	HRESULT hr = m_swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);
 
 	if (FAILED(hr))
 	{
@@ -47,7 +70,7 @@ SwapChain::SwapChain(HWND hwnd, UINT width, UINT height, RenderSystem* render_ma
 		throw std::exception("SwapChain not created successfully");
 	}
 
-	CD3D11_TEXTURE2D_DESC tex_desc = {};
+	D3D11_TEXTURE2D_DESC tex_desc = {};
 	tex_desc.Width = width;
 	tex_desc.Height = height;
 	tex_desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -79,12 +102,11 @@ SwapChain::SwapChain(HWND hwnd, UINT width, UINT height, RenderSystem* render_ma
 }
 
 
-
 SwapChain::~SwapChain()
 {
+	m_dsv->Release();
 	m_render_target_view->Release();
 	m_swap_chain->Release();
-	delete this;
 }
 
 bool SwapChain::PresentFrame(bool vsync)

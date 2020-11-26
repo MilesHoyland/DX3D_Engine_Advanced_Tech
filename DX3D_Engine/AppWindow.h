@@ -25,6 +25,8 @@ public:
 	void OnDestroy() override;
 	virtual void onFocus() override;
 	virtual void onKillFocus() override;
+	virtual void onSize() override;
+
 	
 	//App Tick
 	void OnUpdate() override;
@@ -46,6 +48,7 @@ public:
 public:
 	//Scene Tick
 	void update();
+	void render();
 	void updateModel();
 	void updateCamera();
 	void updateSkyBox();
@@ -102,5 +105,8 @@ private:
 	Matrix4x4 m_world_cam;
 	Matrix4x4 m_view_cam;
 	Matrix4x4 m_proj_cam;
+
+	bool m_play_state = false;
+	bool m_fullscreen_state = false;
 };
 

@@ -9,7 +9,12 @@ public:
 	SwapChain(HWND hwnd, UINT width, UINT height, RenderSystem* render_manager);
 	bool PresentFrame(bool vsync);
 
+	void setFullScreen(bool fullscreen, unsigned int width, unsigned int height);
+	void resize(unsigned int width, unsigned int height);
+
 	~SwapChain();
+private:
+	void reloadBuffers(unsigned int width, unsigned int height);
 private:
 	//render manager
 	RenderSystem* m_renderer = nullptr;

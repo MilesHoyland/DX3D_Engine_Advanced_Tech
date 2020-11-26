@@ -25,6 +25,7 @@ public:
 	void Broadcast();
 	bool Running();
 	RECT GetClientWindowRect();
+	RECT getSizeScreen();
 
 	//Events
 	virtual void OnCreate();
@@ -32,6 +33,7 @@ public:
 	virtual void OnDestroy();
 	virtual void onFocus();
 	virtual void onKillFocus();
+	virtual void onSize();
 
 	//Release the window
 	~Window();

@@ -114,6 +114,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		window->onKillFocus();
 		break;
 	}
+	case WM_SIZE:
+	{
+		// Event fired when the window is resized
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		if (window) window->onSize();
+		break;
+	}
 
 	default:
 		return DefWindowProc(hwnd, msg, wparam, lparam);
@@ -153,6 +160,16 @@ RECT Window::GetClientWindowRect()
 {
 	RECT rc;
 	::GetClientRect(this->hwnd, &rc);
+	return rc;
+}
+
+RECT Window::getSizeScreen()
+{
+	RECT rc;
+
+	rc.right = ::GetSystemMetrics(SM_CXSCREEN);
+	rc.bottom = ::GetSystemMetrics(SM_CYSCREEN);
+
 	return rc;
 }
 
@@ -231,6 +248,9 @@ std::string Window::Exception::TranslateHR(HRESULT hr) noexcept
 	return errorString;
 }
 
+void Window::onSize()
+{
+}
 HRESULT Window::Exception::GetHR() const noexcept
 {
 	return hr;
