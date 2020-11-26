@@ -18,6 +18,8 @@ struct constant
 	Matrix4x4 m_world;
 	Matrix4x4 m_view;
 	Matrix4x4 m_projection;
+	Vector4D m_light_direction;
+	Vector4D m_camera_position;
 
 	unsigned int m_time;
 };
@@ -32,13 +34,13 @@ void AppWindow::OnCreate()
 
 	//Create an load a texture
 	m_tex_wood = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\brick.png");
-	m_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
+	m_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\statue.obj");
 	
 	RECT rc = this->GetClientWindowRect();
 	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain(hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	
-	m_world_cam.setTranslation(Vector3D(0, 0, -2));
+	//m_world_cam.setTranslation(Vector3D(0, 0, -2));
 	/*
 	Vector3D position_list[] =
 	{
@@ -125,6 +127,7 @@ void AppWindow::OnCreate()
 	UINT size_index_list = ARRAYSIZE(index_list);
 	m_ib = GraphicsEngine::get()->getRenderSystem()->createIndexBuffer(index_list, size_index_list);
 	*/
+	m_world_cam.setTranslation(Vector3D(0, 0, -1));
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
@@ -223,6 +226,14 @@ void AppWindow::Update()
 
 
 	Matrix4x4 temp;
+	Matrix4x4 m_light_rot_matrix;
+	m_light_rot_matrix.setIdentity();
+	m_light_rot_matrix.setRotationY(m_light_rot_y);
+
+	m_light_rot_y += 0.707f * m_delta_time;
+
+
+	cc.m_light_direction = m_light_rot_matrix.getZDirection();
 
 	m_delta_scale += m_delta_time / 0.55f;
 
@@ -240,11 +251,13 @@ void AppWindow::Update()
 	world_cam *= temp;
 
 
-	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.1f);
+	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.01f);
 
-	new_pos = new_pos + world_cam.getXDirection() * (m_rightward * 0.1f);
+	new_pos = new_pos + world_cam.getXDirection() * (m_rightward * 0.01f);
 
 	world_cam.setTranslation(new_pos);
+
+	cc.m_camera_position = new_pos;
 
 	m_world_cam = world_cam;
 

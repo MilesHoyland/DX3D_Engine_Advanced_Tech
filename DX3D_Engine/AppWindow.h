@@ -69,6 +69,9 @@ private:
 	float m_delta_scale;
 	float m_delta_rot;
 
+	float m_light_rot_y = 0.0f;
+
+
 	float m_scale_cube = 1;
 
 	float m_rot_x = 0.0f;
