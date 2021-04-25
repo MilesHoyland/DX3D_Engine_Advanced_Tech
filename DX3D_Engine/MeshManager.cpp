@@ -1,5 +1,6 @@
 #include "MeshManager.h"
 #include "Mesh.h"
+#include "ServiceLocator.h"
 
 MeshManager::MeshManager()
 {
@@ -23,6 +24,7 @@ Resource* MeshManager::createResourceFromFileConcrete(const wchar_t* file_path)
 	}
 	catch (...)
 	{
+		FILE_LOG_ERROR("Failed to create Mesh from specified path.");
 		//TODO error
 	}
 

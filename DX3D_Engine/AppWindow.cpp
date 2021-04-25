@@ -29,19 +29,18 @@ void AppWindow::render()
 	//CLEAR THE RENDER TARGET 
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->ClearRenderTargetColour(this->m_swap_chain,
 		0, 0.3f, 0.4f, 1);
+
 	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
 	RECT rc = this->GetClientWindowRect();
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setViewPortSize(rc.right - rc.left, rc.bottom - rc.top);
 
-
-
 	//COMPUTE TRANSFORM MATRICES
 	update();
-
 
 	//RENDER MODEL
 	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(false);
 	drawMesh(m_mesh, m_vs, m_ps, m_cb, m_wood_tex);
+
 	//RENDER SKYBOX/SPHERE
 	GraphicsEngine::get()->getRenderSystem()->setRasterizerState(true);
 	drawMesh(m_sky_mesh, m_vs, m_sky_ps, m_sky_cb, m_sky_tex);
@@ -66,9 +65,9 @@ void AppWindow::OnCreate()
 
 	//Create an load a texture
 	m_wood_tex = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\brick.png");
-	m_sky_tex = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\sky.jpg");
+	m_sky_tex = GraphicsEngine::get()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\snowy-skybox.jpg");
 
-	m_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\suzanne.obj");
+	m_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\sphere_hq.obj");
 	m_sky_mesh = GraphicsEngine::get()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\sphere.obj");
 
 	RECT rc = this->GetClientWindowRect();

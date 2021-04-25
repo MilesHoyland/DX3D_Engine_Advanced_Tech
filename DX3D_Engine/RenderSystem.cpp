@@ -40,8 +40,8 @@ RenderSystem::RenderSystem()
 	}
 	if (FAILED(res))
 	{
-		throw(std::exception("Render System failed to initialise driver types for device."));
 		FILE_LOG_ERROR("Render System failed to initialise device.");
+		throw(std::exception("Render System failed to initialise driver types for device."));
 	}
 
 	m_imm_device_context = std::make_shared<DeviceContext>(m_imm_context, this);
@@ -77,8 +77,9 @@ std::shared_ptr<SwapChain> RenderSystem::createSwapChain(HWND hwnd, UINT width, 
 	try
 	{
 		sc = std::make_shared<SwapChain>(hwnd, width, height, this);
+		FILE_LOG_INFO("SwapChain successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create swapchain"); }
 	return sc;
 }
 
@@ -95,8 +96,9 @@ std::shared_ptr<VertexBuffer> RenderSystem::createVertexBuffer(void* list_vertic
 	try
 	{
 		vb = std::make_shared<VertexBuffer>(list_vertices, size_vertex, size_list, shader_byte_code, size_byte_shader, this);
+		FILE_LOG_INFO("VertexBuffer successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create vertex buffer."); }
 	return vb;
 }
 
@@ -106,8 +108,9 @@ std::shared_ptr<IndexBuffer> RenderSystem::createIndexBuffer(void* list_indices,
 	try
 	{
 		ib = std::make_shared<IndexBuffer>(list_indices, size_list, this);
+		FILE_LOG_INFO("IndexBuffer successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create index buffer."); }
 	return ib;
 }
 
@@ -117,8 +120,9 @@ std::shared_ptr<ConstantBuffer> RenderSystem::createConstantBuffer(void* buffer,
 	try
 	{
 		cb = std::make_unique<ConstantBuffer>(buffer, size_buffer, this);
+		FILE_LOG_INFO("ConstantBuffer successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create constant buffer."); }
 	return cb;
 }
 
@@ -128,8 +132,9 @@ std::shared_ptr<VertexShader> RenderSystem::createVertexShader(const void* shade
 	try
 	{
 		vs = std::make_shared<VertexShader>(shader_byte_code, byte_code_size, this);
+		FILE_LOG_INFO("VertexShader successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create VertexShader."); }
 	return vs;
 }
 
@@ -139,8 +144,9 @@ std::shared_ptr<PixelShader> RenderSystem::createPixelShader(const void* shader_
 	try
 	{
 		ps = std::make_shared<PixelShader>(shader_byte_code, byte_code_size, this);
+		FILE_LOG_INFO("PixelShader successfully created.");
 	}
-	catch (...) {}
+	catch (...) { FILE_LOG_ERROR("Failed to create PixelShader."); }
 	return ps;
 }
 
@@ -150,12 +156,14 @@ bool RenderSystem::compileVertexShader(const wchar_t* file_name, const char* ent
 	if (!SUCCEEDED(D3DCompileFromFile(file_name, nullptr, nullptr, entry_point_name, "vs_5_0", 0, 0, &m_blob, &error_blob)))
 	{
 		if (error_blob) error_blob->Release();
+		FILE_LOG_ERROR("Error in vertex shader compilation.");
 		return false;
 	}
 
 	*shader_byte_code = m_blob->GetBufferPointer();
 	*byte_code_size = m_blob->GetBufferSize();
 
+	FILE_LOG_INFO("Vertex Shader successfully compiled.");
 	return true;
 }
 
@@ -165,12 +173,14 @@ bool RenderSystem::compilePixelShader(const wchar_t* file_name, const char* entr
 	if (!SUCCEEDED(D3DCompileFromFile(file_name, nullptr, nullptr, entry_point_name, "ps_5_0", 0, 0, &m_blob, &error_blob)))
 	{
 		if (error_blob) error_blob->Release();
+		FILE_LOG_ERROR("Error in pixel shader compilation.");
 		return false;
 	}
 
 	*shader_byte_code = m_blob->GetBufferPointer();
 	*byte_code_size = m_blob->GetBufferSize();
 
+	FILE_LOG_INFO("Pixel Shader successfully compiled.");
 	return true;
 }
 

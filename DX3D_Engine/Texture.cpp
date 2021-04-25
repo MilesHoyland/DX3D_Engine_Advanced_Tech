@@ -23,6 +23,7 @@ Texture::Texture(const wchar_t* full_path) : Resource(full_path)
 
 	}
 	else {
+		FILE_LOG_ERROR("Failed to create Texture.");
 		throw(std::exception("Failed to create texture."));
 	}
 }

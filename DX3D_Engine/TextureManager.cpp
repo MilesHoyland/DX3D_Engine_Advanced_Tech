@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 #include "Texture.h"
+#include "ServiceLocator.h"
 
 TextureManager::TextureManager() : ResourceManager()
 {
@@ -23,6 +24,7 @@ Resource* TextureManager::createResourceFromFileConcrete(const wchar_t* file_pat
 	}
 	catch (...) 
 	{
+		FILE_LOG_ERROR("Failed to create Texture from path.");
 		//TODO error
 	}
 

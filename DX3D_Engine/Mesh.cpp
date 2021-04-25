@@ -20,12 +20,20 @@ Mesh::Mesh(const wchar_t* full_path) : Resource(full_path)
 
 	bool res = tinyobj::LoadObj(&attribs, &shapes, &materials, &warn, &err, inputfile.c_str());
 
-	if (!err.empty()) throw std::exception("Mesh not created successfully");
+	if (!err.empty()) { 
+		FILE_LOG_ERROR("Failed to create mesh.");
+		throw std::exception("Mesh not created successfully"); 
+	}
 
-	if (!res) throw std::exception("Mesh not created successfully");
+	if (!res) {
+		FILE_LOG_ERROR("Failed to create mesh.");
+		throw std::exception("Mesh not created successfully");
+	}
 
-	if (shapes.size() > 1) throw std::exception("Mesh not created successfully");
-
+	if (shapes.size() > 1) {
+		FILE_LOG_ERROR("Failed to create mesh.");
+		throw std::exception("Mesh not created successfully");
+	}
 
 	std::vector<VertexMesh> list_vertices;
 	std::vector<unsigned int> list_indices;
